@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connecté !{% endblock %}
+
+
+{% block body %}
+<br><br>
+<div class="container">
+    <img class="img-fluid rounded "src="https://scontent-cdg4-1.xx.fbcdn.net/v/t39.30808-6/355331317_232058129587881_7746128430629634370_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=e3f864&_nc_ohc=DWdj-TWD-cwAX_6j-Mb&_nc_ht=scontent-cdg4-1.xx&oh=00_AfClAXGwH0-NioztCOuog1ZZhK8X0L0fKg8nGRK2D8cDlA&oe=6496B7D3" alt="image services à la personne" style="width: 7rem;">
+    <h1 class="text-center fs-1 text fw-bold d-flex justify-content-between"><FONT size="9pt">Connection</FONT></h1>
+    <img class="img-fluid rounded"src="https://scontent-cdg4-1.xx.fbcdn.net/v/t39.30808-6/355331317_232058129587881_7746128430629634370_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=e3f864&_nc_ohc=DWdj-TWD-cwAX_6j-Mb&_nc_ht=scontent-cdg4-1.xx&oh=00_AfClAXGwH0-NioztCOuog1ZZhK8X0L0fKg8nGRK2D8cDlA&oe=6496B7D3" alt="image services à la personne" style="width: 7rem;">
+</div>
+<br><br><br>
+<form method="post">
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+
+    <br><br><br>
+        <div class="col-3 card mx-auto shadow text-center cardcolor2">
+            Vous êtes connecté {{ app.user.FirstName }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        </div>
+    {% endif %}
+    <br><br><br>
+<div class="col-3 card mx-auto shadow">
+    <div class="card-body cardcolor shadow">
+    <h1 class="h3 font-weight-normal">Connexion</h1>
+    <label for="inputEmail">Email</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <label for="inputPassword">Mot de passe</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    </div>
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}">
+</div> 
+
+    
+        {#Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html#}
+        <br>
+        <div class="col-2 card mx-auto text-center cardcolor2">
+            <label>
+                <input type="checkbox" name="_remember_me" checked/> Se souvenir de moi
+            </label>
+        </div>
+        <br>
+        <div class="col-2 card mx-auto">
+    <button class="btn btn-lg cardcolor d-flex shadow" type="submit">
+        Se connecter
+    </button>
+    </form>
+        </div> 
+    <br><br><br>
+<p style="text-align: center; bg-primary">Je ne suis pas encore inscrit(e) <a href="{{ path('app_registration') }}">Créer un compte</a></p>
+
+
+{% endblock %}
