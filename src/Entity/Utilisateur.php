@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use DateTimeInterface;
+use App\Entity\Contact;
 use App\Entity\Utilisateur;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -50,10 +51,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[Timestampable(on: 'update')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTimeInterface $updatedAt = null;
-
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Contact $contact = null;
 
     public function getId(): ?int
     {

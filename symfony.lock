@@ -194,6 +194,15 @@
             "./config/packages/notifier.yaml"
         ]
     },
+    "symfony/panther": {
+        "version": "2.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "292a3236e81f55b545b09b9954ab097248972ab3"
+        }
+    },
     "symfony/phpunit-bridge": {
         "version": "6.2",
         "recipe": {
@@ -295,6 +304,18 @@
         },
         "files": [
             "./config/packages/messenger.yaml"
+        ]
+    },
+    "symfonycasts/reset-password-bundle": {
+        "version": "1.17",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "97c1627c0384534997ae1047b93be517ca16de43"
+        },
+        "files": [
+            "./config/packages/reset_password.yaml"
         ]
     },
     "twig/extra-bundle": {
