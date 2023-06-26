@@ -18,7 +18,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home_home')]
-
+    #[Route('/', name: 'app_home_home')]
     public function home(HomeRepository $repository): Response
     {
         /*$homes= $repository->findAll();*/
