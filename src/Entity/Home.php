@@ -2,9 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\HomeRepository;
+use App\Entity\Admin;
+use DateTimeInterface;
+use App\Entity\Utilisateur;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\HomeRepository;
+use Doctrine\Common\Collections\Collection;
+use Gedmo\Mapping\Annotation\Timestampable;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: HomeRepository::class)]
 class Home
@@ -45,6 +51,17 @@ class Home
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $articles = null;
+
+    #[ORM\ManyToMany(targetEntity: Admin::class, mappedBy: 'Home')]
+    private Collection $admins;
+
+    #[ORM\ManyToOne(inversedBy: 'homes')]
+    private ?Utilisateur $Utilisateur = null;
+
+    public function __construct()
+    {
+        $this->admins = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -135,7 +152,7 @@ class Home
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -167,6 +184,45 @@ class Home
     public function setArticles(?string $articles): self
     {
         $this->articles = $articles;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Admin>
+     */
+    public function getAdmins(): Collection
+    {
+        return $this->admins;
+    }
+
+    public function addAdmin(Admin $admin): static
+    {
+        if (!$this->admins->contains($admin)) {
+            $this->admins->add($admin);
+            $admin->addHome($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdmin(Admin $admin): static
+    {
+        if ($this->admins->removeElement($admin)) {
+            $admin->removeHome($this);
+        }
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->Utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $Utilisateur): static
+    {
+        $this->Utilisateur = $Utilisateur;
 
         return $this;
     }

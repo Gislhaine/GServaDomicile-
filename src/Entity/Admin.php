@@ -2,9 +2,14 @@
 
 namespace App\Entity;
 
+use App\Entity\Home;
 use App\Entity\Admin;
+use App\Entity\Contact;
+use App\Entity\Utilisateur;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AdminRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: AdminRepository::class)]
 #[ORM\Table(name: '`admin`')]
@@ -26,6 +31,20 @@ class Admin
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $password = null;
+
+    #[ORM\ManyToOne]
+    private ?Contact $Contact = null;
+
+    #[ORM\ManyToOne]
+    private ?Utilisateur $Utilisateur = null;
+
+    #[ORM\ManyToMany(targetEntity: Home::class, inversedBy: 'admins')]
+    private Collection $Home;
+
+    public function __construct()
+    {
+        $this->Home = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -76,6 +95,54 @@ class Admin
     public function setPassword(?string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getContact(): ?Contact
+    {
+        return $this->Contact;
+    }
+
+    public function setContact(?Contact $Contact): static
+    {
+        $this->Contact = $Contact;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->Utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $Utilisateur): static
+    {
+        $this->Utilisateur = $Utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Home>
+     */
+    public function getHome(): Collection
+    {
+        return $this->Home;
+    }
+
+    public function addHome(Home $home): static
+    {
+        if (!$this->Home->contains($home)) {
+            $this->Home->add($home);
+        }
+
+        return $this;
+    }
+
+    public function removeHome(Home $home): static
+    {
+        $this->Home->removeElement($home);
 
         return $this;
     }

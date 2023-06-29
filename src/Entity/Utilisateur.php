@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
+use App\Entity\Home;
 use DateTimeInterface;
 use App\Entity\Contact;
 use App\Entity\Utilisateur;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation\Timestampable;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
@@ -51,6 +54,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[Timestampable(on: 'update')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTimeInterface $updatedAt = null;
+
+    #[ORM\OneToMany(mappedBy: 'Utilisateur', targetEntity: Home::class)]
+    private Collection $homes;
+
+    #[ORM\ManyToOne(inversedBy: 'utilisateurs')]
+    private ?Contact $Contact = null;
+
+    public function __construct()
+    {
+        $this->homes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -190,6 +204,36 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setContact(Contact $contact): self
     {
         $this->contact = $contact;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Home>
+     */
+    public function getHomes(): Collection
+    {
+        return $this->homes;
+    }
+
+    public function addHome(Home $home): static
+    {
+        if (!$this->homes->contains($home)) {
+            $this->homes->add($home);
+            $home->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHome(Home $home): static
+    {
+        if ($this->homes->removeElement($home)) {
+            // set the owning side to null (unless already changed)
+            if ($home->getUtilisateur() === $this) {
+                $home->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }
