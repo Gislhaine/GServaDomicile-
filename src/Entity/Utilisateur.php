@@ -216,17 +216,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->homes;
     }
 
-    public function addHome(Home $home): static
+    public function addHome(Home $home): void
     {
         if (!$this->homes->contains($home)) {
             $this->homes->add($home);
             $home->setUtilisateur($this);
         }
 
-        return $this;
+       
     }
 
-    public function removeHome(Home $home): static
+    public function removeHome(Home $home): void
     {
         if ($this->homes->removeElement($home)) {
             // set the owning side to null (unless already changed)
@@ -235,6 +235,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
             }
         }
 
-        return $this;
+      
     }
 }

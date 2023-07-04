@@ -196,23 +196,23 @@ class Home
         return $this->admins;
     }
 
-    public function addAdmin(Admin $admin): static
+    public function addAdmin(Admin $admin): void
     {
         if (!$this->admins->contains($admin)) {
             $this->admins->add($admin);
             $admin->addHome($this);
         }
 
-        return $this;
+        
     }
 
-    public function removeAdmin(Admin $admin): static
+    public function removeAdmin(Admin $admin): void
     {
         if ($this->admins->removeElement($admin)) {
             $admin->removeHome($this);
         }
 
-        return $this;
+        
     }
 
     public function getUtilisateur(): ?Utilisateur
@@ -220,10 +220,10 @@ class Home
         return $this->Utilisateur;
     }
 
-    public function setUtilisateur(?Utilisateur $Utilisateur): static
+    public function setUtilisateur(?Utilisateur $Utilisateur): void
     {
         $this->Utilisateur = $Utilisateur;
 
-        return $this;
+       
     }
 }
