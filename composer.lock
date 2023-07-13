@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d57cb0d37c9dde7ea555b62a60abd3cd",
+    "content-hash": "fa3edb7234fdcb5b4e58104fa8ed2c44",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2305,7 +2305,7 @@
             "time": "2021-07-14T16:46:02+00:00"
         },
         {
-            "name": "symfony",
+            "name": "sensio/framework-extra-bundle",
             "version": "v6.2.10",
             "source": {
                 "type": "git",
