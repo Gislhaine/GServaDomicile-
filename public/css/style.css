@@ -3,12 +3,12 @@
 
 .topnav {
 position: fixed;
-padding: 5px;
+padding: 15px;
 top: 0;
 left: 0;
 right: 0;
 display: flex;
-align-items: center;
+align-items:first baseline;
 background-color: white; 
 z-index: 10;
 }
@@ -21,6 +21,8 @@ height: auto;
 display: flex;
 justify-content: space-between;
 align-items: center;
+width: 150px;
+height: 150px;
 }
 
 .directiontextenav {
@@ -60,25 +62,36 @@ flex-grow: 1;
 }
 
 .blocimages {
-padding-left: 50px;
-margin-left: 50px;
+padding-right: 100px;
+margin-left: -100px;
 }
 
+.blocimages1 {
+ align-items: center;
+ justify-content: center;
+ padding-left: 6%;
+  }
 
+.blocimages2 {
+align-items: center;
+justify-content: center;
+padding-left: 5%;
+     }
 
+.blocimages3 {
+ align-items: center;
+ justify-content: center;
+ padding-left: 1%;
+}    
 
 /* GENERAL*/
-.container {
+.container1 {
 display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: center;
 }
 
-.blocimages{
-display:flex;
-flex-direction: row;
-border-radius: 25% 10%;}
 
 .form-card {
 background-color: #81724B;
@@ -148,6 +161,7 @@ background: #917A40;
 .cardcolor3{
 background:#AA8111;
 }
+
 
 
 /* footer */
@@ -246,4 +260,16 @@ width: 100%;
 margin-left: 0;
 }
 
-    
+@media (max-width: 768px) {
+    /* Styles pour les écrans de taille inférieure ou égale à 768px */
+  }
+  
+  @media (max-width: 576px) {
+    /* Styles pour les écrans de taille inférieure ou égale à 576px */
+  }
+  
+  @media (max-width: 480px) {
+    img {
+        width: 100%;
+    }
+}

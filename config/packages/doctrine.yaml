@@ -34,6 +34,16 @@ when@prod:
                 type: pool
                 pool: doctrine.result_cache_pool
 
+    dbal:
+        url: 'sqlite:///%kernel.project_dir%/var/data.db'
+        dbname: my_database
+        user: my_username
+        password: my_password
+        host: 127.0.0.1
+        port: 3306
+        driver: pdo_mysql
+
+
     framework:
         cache:
             pools:
@@ -41,3 +51,5 @@ when@prod:
                     adapter: cache.app
                 doctrine.system_cache_pool:
                     adapter: cache.system
+   
+    

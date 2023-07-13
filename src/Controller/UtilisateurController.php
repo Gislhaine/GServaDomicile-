@@ -54,7 +54,7 @@ class UtilisateurController extends AbstractController
 
              //redirection vers la page d'accueil
              
-             return $this->redirectToRoute('app_home_home');
+             return $this->redirectToRoute('app_contact');
              // $this->addFlash('success', "Votre compte a bien été créé. Bienvenue !");
          }
 
