@@ -46,6 +46,9 @@ class Contact
     #[ORM\OneToMany(mappedBy: 'Contact', targetEntity: Utilisateur::class)]
     private Collection $utilisateurs;
 
+    #[ORM\Column(length: 255)]
+    private ?string $type = null;
+
     public function __construct()
     {
         $this->utilisateurs = new ArrayCollection();
@@ -168,5 +171,17 @@ class Contact
         }
 
        
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): static
+    {
+        $this->type = $type;
+
+        return $this;
     }
 }

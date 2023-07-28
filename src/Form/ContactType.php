@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -42,6 +44,19 @@ class ContactType extends AbstractType
             'label' => 'Envoyer'
 
         ])
+
+        ->add('type', ChoiceType::class, [
+            'choices' => [
+                'Particulier' => 'particulier',
+                'Professionnel' => 'professionnel',
+            ],
+            'expanded' => true, // Afficher les choix sous forme de boutons radio
+        ])
+        ->add('lastName', TextType::class, [
+            'label' => 'Nom : ',
+            'required' => true,
+        ])
+
         ;
     }
 
@@ -51,5 +66,6 @@ class ContactType extends AbstractType
             'data_class' => Contact::class,
             'csrf_protection' => true,
         ]);
+        $resolver->setDefined('contact_type');
     }
 }

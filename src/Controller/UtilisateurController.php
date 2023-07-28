@@ -73,7 +73,9 @@ class UtilisateurController extends AbstractController
     {
         $contact = new Contact();    
         
-        $form=$this->createForm(ContactType::class);
+        $form=$this->createForm(ContactType::class, $contact, [
+            'contact_type' => 'particulier',
+        ]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid ()){
@@ -94,13 +96,6 @@ class UtilisateurController extends AbstractController
             'form' => $form->createView()
             
         ]);
-
-        
-        if ($form->isSubmitted() && $form->isValid ())
-        return $this->redirectToRoute('app_home_pages',[
-
-        ]);  
-       
     }
 
 
@@ -110,8 +105,9 @@ class UtilisateurController extends AbstractController
     {
         $contact = new Contact();    
         
-        $form=$this->createForm(ContactType::class, $contact);
-
+        $form=$this->createForm(ContactType::class, $contact, [
+            'contact_type' => 'professionnel',
+        ]);
         $form->handleRequest($request);
          if ($form->isSubmitted() && $form->isValid ()) {
             
@@ -132,13 +128,6 @@ class UtilisateurController extends AbstractController
                 'form' => $form->createView()
             ]);       
         
-
-        if ($form->isSubmitted() && $form->isValid ())
-        return $this->redirectToRoute('app_home_pages',[
-
-        ]);
-
-       
     }
     public function configureMenuItems(): iterable{
         yield TextareaField::new('description', 'Description', 'message', 'Message')->renderAsHtml();
